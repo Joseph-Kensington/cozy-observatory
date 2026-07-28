@@ -1,149 +1,110 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f7f2ef" />
-  <title>Cozy 寿星专属</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#121118" />
+  <title>ROOT SBTI｜新奶器产品业务线</title>
   <style>
-    :root { --ink:#332f43; --muted:#736d82; --cream:#fffaf6; --peach:#ffcfb8; --rose:#ee9b9b; --lilac:#b8afe5; --mint:#9ad6c2; --line:rgba(83,67,104,.12); --shadow:0 22px 70px rgba(85,55,83,.12); }
-    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; min-width:320px; color:var(--ink); background:radial-gradient(circle at 12% 10%, rgba(255,205,184,.55), transparent 27rem),radial-gradient(circle at 88% 20%, rgba(184,175,229,.42), transparent 29rem),#f7f2ef; font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; }
-    button,input,textarea { font:inherit; } button { cursor:pointer; } .shell { max-width:1180px; margin:auto; padding:24px clamp(18px,4vw,56px) 72px; position:relative; overflow:hidden; }
-    .orb { position:absolute; border-radius:50%; filter:blur(1px); opacity:.58; pointer-events:none; animation:float 7s ease-in-out infinite; } .orb.one { width:90px; height:90px; background:#ffd7a9; top:130px; left:-18px; } .orb.two { width:56px; height:56px; background:#b7dccc; right:5%; top:290px; animation-delay:-3s; } .orb.three { width:28px; height:28px; background:#cfb4ec; right:15%; top:90px; animation-delay:-5s; }
-    @keyframes float { 50% { transform:translateY(-14px) translateX(7px); } }
-    .topbar { display:flex; justify-content:space-between; align-items:center; gap:20px; padding-bottom:30px; } .brand { display:flex; gap:10px; align-items:center; font-weight:750; letter-spacing:-.03em; } .brand-mark { width:29px; height:29px; border-radius:10px; display:grid; place-items:center; color:#fff; background:linear-gradient(145deg,#eea49e,#bcb4e4); box-shadow:0 6px 15px rgba(208,135,141,.24); font-size:15px; }
-    .tiny-pill,.status-label { border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.54); color:var(--muted); padding:8px 12px; font-size:12px; } .nav-link { color:var(--muted); text-decoration:none; font-size:14px; }
-    .hero { display:grid; grid-template-columns:1.04fr .96fr; align-items:center; gap:clamp(28px,7vw,88px); min-height:560px; padding:32px 0 52px; } .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#6d6686; font-weight:700; font-size:13px; letter-spacing:.06em; } .pulse { width:8px; height:8px; border-radius:50%; background:#eb9a96; box-shadow:0 0 0 5px rgba(235,154,150,.14); }
-    h1 { font-size:clamp(42px,6vw,74px); line-height:1.02; letter-spacing:-.065em; margin:17px 0; max-width:560px; } h1 em { font-style:normal; color:#8b7ec7; } .sub { max-width:480px; color:var(--muted); font-size:17px; line-height:1.8; margin:0 0 26px; }
-    .moods { display:flex; flex-wrap:wrap; gap:9px; margin:12px 0 28px; } .mood { border:1px solid var(--line); color:#5d5870; background:rgba(255,255,255,.52); padding:10px 13px; border-radius:14px; transition:.2s; } .mood:hover,.mood.selected { background:#fff; border-color:#ad9bd3; transform:translateY(-2px); color:#675a99; box-shadow:0 6px 18px rgba(108,88,146,.1); } .start { border:0; color:#fff; padding:14px 19px; border-radius:15px; background:linear-gradient(110deg,#8c7ec7,#df9898); font-weight:750; box-shadow:0 11px 25px rgba(130,103,170,.28); transition:.2s; } .start:hover { transform:translateY(-2px); box-shadow:0 14px 28px rgba(130,103,170,.34); }
-    .preview { min-height:405px; position:relative; display:grid; place-items:center; } .stack { width:min(340px,80vw); height:390px; position:relative; } .back-card,.card { position:absolute; inset:0; border-radius:28px; } .back-card { border:1px solid rgba(255,255,255,.8); box-shadow:var(--shadow); } .back-card.one { transform:rotate(-10deg) translate(-15px,5px); background:linear-gradient(145deg,#ffd8c4,#f2b9bb); } .back-card.two { transform:rotate(8deg) translate(12px,4px); background:linear-gradient(145deg,#d6d0f4,#b4d9cc); } .card { z-index:3; display:flex; flex-direction:column; justify-content:space-between; padding:28px; color:white; background:linear-gradient(145deg,#8c7ec7 0%,#b5a6db 53%,#e8a1a1 100%); box-shadow:0 25px 55px rgba(92,76,128,.24); transform:rotate(-1.5deg); } .card .mini { font-size:12px; letter-spacing:.08em; opacity:.83; } .card .card-title { font-size:36px; font-weight:760; letter-spacing:-.06em; line-height:1.08; } .card .star { align-self:flex-end; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,.45); display:grid; place-items:center; font-size:19px; } .preview-note { position:absolute; right:0; bottom:2px; width:170px; padding:13px 15px; border-radius:17px; color:#665e77; background:rgba(255,255,255,.77); box-shadow:0 10px 25px rgba(77,54,78,.08); font-size:13px; line-height:1.5; transform:rotate(3deg); }
-    .game { display:none; margin:6px auto 42px; max-width:960px; } .game.active { display:block; animation:rise .4s ease both; } @keyframes rise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } } .game-head { text-align:center; margin:16px auto 20px; } .game-head h2 { font-size:30px; letter-spacing:-.05em; margin:10px 0 7px; } .game-head p { color:var(--muted); margin:0; }
-    .quiz { display:none; max-width:680px; margin:0 auto 46px; } .quiz.active { display:block; animation:rise .42s ease both; } .question-card { padding:clamp(24px,5vw,42px); border-radius:30px; background:rgba(255,253,250,.79); border:1px solid rgba(111,88,133,.1); box-shadow:var(--shadow); } .question-top { display:flex; justify-content:space-between; align-items:center; gap:15px; color:#827793; font-size:12px; font-weight:700; letter-spacing:.09em; } .question-card h2 { margin:22px 0 10px; font-size:clamp(27px,4vw,38px); letter-spacing:-.06em; line-height:1.18; } .question-card p { margin:0 0 25px; color:var(--muted); line-height:1.65; } .answer-list { display:grid; gap:10px; } .answer { text-align:left; padding:16px 17px; border:1px solid var(--line); background:rgba(255,255,255,.7); border-radius:16px; color:#514b62; transition:.2s; } .answer:hover { transform:translateX(4px); background:#fff; border-color:#ab9bd1; color:#715f99; } .answer small { display:block; color:#9b91a0; margin-top:5px; font-size:12px; } .clue-dots { display:flex; gap:6px; } .clue-dots i { width:7px; height:7px; display:block; border-radius:50%; background:#d8d0dc; } .clue-dots i.on { background:#a092cd; } .mystery-note { margin-top:20px !important; border-radius:13px; padding:12px 14px; color:#776b85 !important; background:#f3eef6; font-size:13px; }
-    .game-stage { min-height:585px; display:grid; place-items:center; position:relative; } .draw-card { width:min(430px,90vw); min-height:555px; position:relative; perspective:1200px; } .inner { position:absolute; inset:0; transition:transform .75s cubic-bezier(.2,.8,.2,1); transform-style:preserve-3d; } .draw-card.flipped .inner { transform:rotateY(180deg); } .face { position:absolute; inset:0; border-radius:30px; padding:28px; backface-visibility:hidden; box-shadow:var(--shadow); overflow:hidden; } .front { display:grid; place-items:center; text-align:center; color:#fff; background:linear-gradient(155deg,#8f82cc,#b6abe5 54%,#e69b9b); } .front:after { content:""; width:170px; height:170px; position:absolute; border:1px solid rgba(255,255,255,.25); border-radius:50%; } .front .front-content { z-index:1; } .front .spark { font-size:32px; margin-bottom:17px; } .front strong { font-size:26px; letter-spacing:-.05em; display:block; } .front span { display:block; margin-top:11px; opacity:.82; font-size:14px; } .back { transform:rotateY(180deg); color:var(--ink); background:linear-gradient(150deg,#fffdfa,#fbf1ee); display:flex; flex-direction:column; } .back .category { color:#8675b9; font-size:12px; font-weight:700; letter-spacing:.1em; } .back h3 { font-size:34px; letter-spacing:-.07em; margin:11px 0 14px; } .copy-block { padding:9px 0; border-top:1px solid var(--line); } .copy-block small { display:block; color:#988e9c; margin-bottom:4px; font-size:11px; letter-spacing:.05em; } .copy-block p { margin:0; line-height:1.55; font-size:14px; } .copy-block.good p { color:#8b5d73; font-weight:700; } .copy-block.reminder p { color:#635d74; } .draw-button { position:absolute; z-index:3; bottom:-20px; left:50%; transform:translateX(-50%); border:0; border-radius:999px; padding:13px 21px; color:#fff; background:#645889; box-shadow:0 10px 22px rgba(86,70,120,.24); font-weight:700; white-space:nowrap; } .draw-button:focus-visible,.mood:focus-visible,.start:focus-visible { outline:3px solid #5f5290; outline-offset:3px; }
-    .reaction-row { display:none; justify-content:center; gap:10px; flex-wrap:wrap; padding-top:41px; } .reaction-row.show { display:flex; animation:rise .35s ease both; } .reaction { border:1px solid var(--line); background:rgba(255,255,255,.65); padding:10px 13px; color:#635d74; border-radius:13px; } .reaction:hover { background:#fff; border-color:#b3a7d4; } .reaction.active { color:#765f9f; background:#f4effd; border-color:#aa9bcf; }
-    .share-copy { color:#796e8d; text-align:center; font-size:13px; margin:14px 0 0; min-height:20px; }
-    .wall { border:1px solid rgba(111,88,133,.1); border-radius:30px; background:rgba(255,255,255,.58); padding:clamp(22px,4vw,42px); box-shadow:0 12px 45px rgba(96,73,102,.06); } .section-top { display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:25px; } .section-top h2 { margin:0; font-size:28px; letter-spacing:-.055em; } .section-top p { color:var(--muted); margin:6px 0 0; font-size:14px; } .comfort { font-size:13px; color:#7568a0; font-weight:700; white-space:nowrap; }
-    .wall-grid { display:grid; grid-template-columns:1fr 1fr 1.15fr; gap:14px; } .wall-card { border-radius:22px; background:rgba(255,253,250,.87); padding:20px; min-height:164px; border:1px solid rgba(111,88,133,.08); } .wall-card small { color:#938b9a; font-size:11px; letter-spacing:.07em; } .big-number { font-size:42px; font-weight:780; letter-spacing:-.08em; margin:13px 0 5px; color:#78699d; } .wall-card p { margin:0; color:#6f6879; font-size:14px; line-height:1.6; } .tag-cloud { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; } .tag { padding:7px 10px; border-radius:999px; font-size:12px; background:#f4edf2; color:#8a6573; } .light-list { margin-top:12px; display:grid; gap:8px; } .light { padding:10px 11px; border-radius:11px; background:#f7f3ef; color:#625c70; font-size:13px; line-height:1.45; }
-    .modal { display:none; position:fixed; inset:0; z-index:10; background:rgba(47,38,57,.3); backdrop-filter:blur(5px); padding:20px; place-items:center; } .modal.open { display:grid; } .modal-card { width:min(470px,100%); border-radius:26px; padding:28px; background:#fffaf7; box-shadow:0 26px 75px rgba(42,32,53,.22); } .modal-card h3 { margin:0 0 8px; font-size:25px; letter-spacing:-.05em; } .modal-card p { margin:0 0 17px; color:var(--muted); font-size:14px; line-height:1.55; } textarea { width:100%; min-height:100px; border:1px solid #e1d8db; border-radius:15px; padding:13px; outline:none; resize:vertical; color:var(--ink); background:#fff; } textarea:focus { border-color:#9d90c8; box-shadow:0 0 0 3px rgba(157,144,200,.13); } .modal-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:15px; } .plain { border:0; background:transparent; color:#726a7e; padding:10px 12px; } .submit { border:0; border-radius:12px; padding:10px 15px; background:#72649d; color:#fff; font-weight:700; }
-    footer { text-align:center; color:#918998; font-size:12px; padding:28px 0 0; } @media (max-width:760px) { .topbar { padding-bottom:8px; } .nav-link { display:none; } .hero { grid-template-columns:1fr; padding-top:58px; } .preview { min-height:350px; margin-top:5px; } .preview-note { right:-3px; } .wall-grid { grid-template-columns:1fr; } .section-top { align-items:start; flex-direction:column; } .game-stage { min-height:575px; } }
-    @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; } }
+    :root{--ink:#121118;--paper:#f7f4ed;--lime:#d7ff36;--pink:#ff61b8;--violet:#8d68ff;--line:rgba(18,17,24,.16);--muted:#686474;--card:#fffdf8}*{box-sizing:border-box}html{background:var(--ink)}body{margin:0;background:radial-gradient(circle at 15% 10%,#47366c 0,transparent 27%),radial-gradient(circle at 90% 15%,#44561c 0,transparent 24%),var(--ink);color:var(--ink);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;min-height:100vh}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}.shell{max-width:1080px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;color:var(--paper);gap:15px;margin-bottom:38px}.brand{font-size:13px;font-weight:900;letter-spacing:.14em}.brand b{color:var(--lime)}.tag{border:1px solid rgba(247,244,237,.45);padding:8px 10px;font-size:11px;font-weight:800;letter-spacing:.08em;border-radius:999px}.screen{display:none}.screen.active{display:block}.hero,.panel,.result-card{border:3px solid var(--ink);box-shadow:9px 9px 0 var(--lime)}.hero{position:relative;overflow:hidden;background:var(--paper);padding:clamp(28px,6vw,70px);min-height:580px}.hero:after{content:"SBTI / ROOT / SBTI / ROOT /";position:absolute;bottom:18px;left:-4px;white-space:nowrap;font-weight:1000;font-size:clamp(36px,7vw,86px);letter-spacing:-.08em;color:rgba(18,17,24,.08);pointer-events:none}.eyebrow,.label{display:inline-block;background:var(--ink);color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.12em;padding:8px 10px;transform:rotate(-2deg)}h1{font-size:clamp(48px,9vw,105px);line-height:.83;letter-spacing:-.09em;margin:25px 0 26px;max-width:800px}.hero h1 span{color:var(--violet);display:block;text-shadow:4px 4px 0 var(--pink)}.sub{font-size:clamp(16px,2vw,20px);line-height:1.75;max-width:620px;margin:0 0 28px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 30px}.chip{font-size:13px;font-weight:800;border:2px solid var(--ink);padding:8px 12px;background:#fff}.chip:nth-child(2n){background:var(--pink)}.chip:nth-child(3n){background:var(--lime)}.cta-row{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}.btn{border:2px solid var(--ink);padding:15px 20px;background:var(--lime);font-weight:1000;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}.btn:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}.btn.alt{background:#fff}.fine{position:relative;z-index:1;font-size:12px;line-height:1.7;color:var(--muted);max-width:610px;margin-top:34px}.test-wrap{background:var(--paper);padding:clamp(24px,4vw,55px);border:3px solid var(--ink);box-shadow:9px 9px 0 var(--pink)}.test-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:28px}.test-head h2{font-size:clamp(28px,4vw,46px);letter-spacing:-.06em;margin:10px 0 0}.counter{font-weight:1000;font-size:16px}.meter{height:11px;background:#dedad2;border:2px solid var(--ink);margin:0 0 28px}.meter i{display:block;height:100%;background:var(--lime);width:3%;transition:width .25s}.question-kicker{color:var(--violet);font-weight:1000;font-size:13px;letter-spacing:.1em}.question{font-size:clamp(25px,3.5vw,42px);line-height:1.12;letter-spacing:-.06em;font-weight:950;margin:12px 0 12px}.question-note{font-size:15px;color:var(--muted);margin:0 0 22px}.options{display:grid;grid-template-columns:1fr 1fr;gap:14px}.option{min-height:175px;text-align:left;border:3px solid var(--ink);padding:20px;background:var(--card);box-shadow:5px 5px 0 var(--ink);transition:.16s}.option:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink);background:var(--lime)}.option b{display:block;font-size:34px;line-height:1;color:var(--pink);margin-bottom:22px}.option span{font-size:18px;line-height:1.45;font-weight:900}.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}.text-btn{background:transparent;border:0;color:var(--muted);font-size:14px;text-decoration:underline;padding:8px}.result-card{background:var(--paper);padding:clamp(24px,5vw,62px);position:relative;overflow:hidden}.result-card:before{content:"ROOT\A SBTI";white-space:pre;position:absolute;right:20px;top:18px;text-align:right;color:rgba(18,17,24,.1);font-size:clamp(46px,9vw,105px);font-weight:1000;line-height:.72;letter-spacing:-.11em}.result-code{display:inline-block;background:var(--lime);border:2px solid var(--ink);padding:8px 12px;font-weight:1000;letter-spacing:.12em;position:relative}.result-card h2{font-size:clamp(42px,7vw,78px);line-height:.9;letter-spacing:-.085em;margin:20px 0 18px;position:relative;max-width:690px}.result-card h2 em{font-style:normal;color:var(--violet);display:block}.definition{font-size:20px;line-height:1.6;font-weight:750;max-width:750px;position:relative}.broadcast{background:var(--ink);color:var(--paper);margin:36px 0 26px;padding:24px;border:3px solid var(--ink);box-shadow:7px 7px 0 var(--pink);position:relative}.broadcast:before{content:"PERSONA BROADCAST / 已锁定";display:block;color:var(--lime);font-size:11px;font-weight:1000;letter-spacing:.14em;margin-bottom:18px}.broadcast p{margin:0;font-size:clamp(21px,3vw,33px);line-height:1.28;font-weight:950;letter-spacing:-.05em}.modules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.module{border:2px solid var(--ink);padding:18px;background:#fff}.module:nth-child(2){background:#f4ecff}.module:nth-child(3){background:#e9ffd6}.module:nth-child(4){background:#ffe3f1}.module h3{font-size:12px;margin:0 0 10px;letter-spacing:.12em}.module p{margin:0;font-size:16px;font-weight:750;line-height:1.6}.history{margin-top:26px;border-top:2px dashed var(--ink);padding-top:20px}.history h3{margin:0 0 10px;font-size:15px}.history-list{display:flex;gap:9px;flex-wrap:wrap}.history-chip{border:2px solid var(--ink);background:#fff;padding:9px 10px;font-weight:850;font-size:13px}.footer{color:rgba(247,244,237,.75);font-size:12px;text-align:center;padding:30px 0 10px;line-height:1.7}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--lime);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--pink);padding:12px 16px;font-size:14px;font-weight:950;transition:transform .25s;z-index:9}.toast.show{transform:translate(-50%,0)}@media(max-width:650px){.shell{padding:12px}.topbar{margin-bottom:22px}.hero{min-height:580px}.options,.modules{grid-template-columns:1fr}.option{min-height:135px}.test-head{align-items:flex-start;flex-direction:column}.nav-row{align-items:flex-start;flex-direction:column}.result-card{box-shadow:6px 6px 0 var(--lime)}}
   </style>
 </head>
 <body>
-  <style>
-    /* BLESSED DROP — a louder, streetwear-inspired card treatment */
-    .game-stage { min-height:650px; }
-    .draw-card { width:min(455px,92vw); min-height:620px; }
-    .face.back { padding:0; background:#f9f5ed; color:#151318; border:3px solid #151318; box-shadow:12px 12px 0 #151318, 0 24px 55px rgba(40,25,42,.22); overflow:hidden; }
-    .card-topline { display:flex; align-items:center; justify-content:space-between; padding:13px 17px; color:#151318; background:#f7cf48; border-bottom:3px solid #151318; font-size:11px; font-weight:900; letter-spacing:.12em; }
-    .blessed-stamp { display:inline-flex; align-items:center; padding:5px 8px; border:2px solid #151318; background:#fff; transform:rotate(3deg); letter-spacing:.06em; }
-    .card-body { padding:18px 20px 20px; height:100%; display:flex; flex-direction:column; }
-    .back h3 { font-size:43px; line-height:.95; color:#151318; margin:1px 0 14px; text-transform:uppercase; }
-    .hero-benefit { padding:15px; background:linear-gradient(135deg,#f58d9c,#ecafce 48%,#bdaaf0); color:#171219; border:3px solid #171219; box-shadow:5px 5px 0 #171219; }
-    .hero-benefit small,.mini-block small,.action-strip small { display:block; font-size:10px; letter-spacing:.12em; font-weight:900; }
-    .hero-benefit strong { display:block; margin:7px 0 8px; font-size:27px; line-height:1.05; letter-spacing:-.07em; }
-    .hero-benefit p { margin:0; font-size:13px; line-height:1.55; font-weight:650; }
-    .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:15px 0 12px; }
-    .mini-block { min-height:123px; padding:12px; border:2px solid #171219; background:#fff; }
-    .mini-block.warning { background:#e6f2e7; }
-    .mini-block small { margin-bottom:7px; color:#675e73; }
-    .mini-block p { margin:0; font-size:13px; line-height:1.53; color:#221e27; }
-    .action-strip { margin-top:auto; padding:13px; color:#fff; background:#171219; }
-    .action-strip small { color:#f7cf48; margin-bottom:5px; }
-    .action-strip p { margin:0; color:#fff; font-size:13px; line-height:1.48; }
-    .memory-button { display:none; margin:11px 0 0; padding:10px 12px; border:2px solid #171219; background:#fff; color:#171219; font-weight:850; border-radius:12px; box-shadow:3px 3px 0 #f7cf48; }
-    .memory-button.show { display:inline-block; }
-    @media (max-width:760px) { .game-stage { min-height:665px; } .draw-card { min-height:630px; } .back h3 { font-size:38px; } .hero-benefit strong { font-size:24px; } }
-  </style>
   <main class="shell">
-    <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
-    <header class="topbar"><div class="brand"><span class="brand-mark">✦</span><span>Momcozy · Birthday Club</span></div><a class="nav-link" href="#wall">看看寿星祝福墙 ↓</a><span class="tiny-pill" id="drawCount">寿星已领取 0 次</span></header>
-    <section class="hero" id="home">
-      <div>
-        <div class="eyebrow"><span class="pulse"></span> BIRTHDAY DROP · 仅限今日寿星</div>
-        <h1>Cozy <em>寿星</em><br>专属卡</h1>
-        <p class="sub">今天的主角只需要做一件事：收下这份专属于你的生日利好。选择十个生活频道，寿星广播会送来一张只属于你的祝福卡。</p>
-        <p class="status-label">仅为今天过生日的你准备。不是寿星，请把这个入口留给今天的主角。</p>
-        <button class="start" id="startGame">我是今日寿星，领取专属卡 →</button>
-        <button class="memory-button" id="resumeButton">↻ 继续查看上次的好运结果</button>
+    <header class="topbar"><div class="brand">ROOT <b>/</b> NEW BREAST PUMP</div><div class="tag">INTERNAL CULTURE GAME</div></header>
+    <section class="screen active" id="landing">
+      <div class="hero">
+        <div class="eyebrow">SBTI · SQUEEZE BUSINESS TYPE INDEX</div>
+        <h1>你的新奶器<br><span>产品人格</span>已上线</h1>
+        <p class="sub">不是开会，是给你的脑内产品部做一次频段匹配。28 道题后，解锁一张只属于你的 <b>ROOT SBTI 广播人格卡</b>。</p>
+        <div class="chips"><span class="chip">场景感知</span><span class="chip">爆改能量</span><span class="chip">协作频段</span><span class="chip">证据直觉</span></div>
+        <div class="cta-row"><button class="btn" id="startBtn">开启我的 SBTI →</button><button class="btn alt" id="resumeBtn" hidden>查看我上次的类型</button></div>
+        <p class="fine">SBTI 是 ROOT 新奶器产品业务线的内部趣味测试：不收集个人信息，不评价能力、绩效或心理状态。别端着，第一反应通常更有戏。</p>
       </div>
-      <div class="preview" aria-hidden="true"><div class="stack"><div class="back-card one"></div><div class="back-card two"></div><div class="card"><span class="mini">BIRTHDAY ONLY · TODAY'S STAR</span><div class="card-title">寿星<br>已就位</div><span class="star">✦</span></div></div><div class="preview-note">今天的主角，<br>应该收到一点偏爱。</div></div>
     </section>
-    <section class="quiz" id="quiz" aria-live="polite"><div class="question-card" id="questionCard"></div></section>
-    <section class="game" id="game" aria-live="polite">
-      <div class="game-head"><div class="eyebrow">BIRTHDAY RADIO</div><h2>寿星频道，已经调好</h2><p>现在，广播牌要送来一条只属于今天主角的好消息。</p></div>
-      <div class="game-stage"><div class="draw-card" id="drawCard"><div class="inner"><div class="face front"><div class="front-content"><div class="spark">✦</div><strong>寿星，请收听</strong><span>你的生日广播，正在播出</span></div></div><article class="face back"><div class="card-topline"><span id="cardCategory">BIRTHDAY RADIO · 01</span><span class="blessed-stamp">TODAY'S STAR ✦</span></div><div class="card-body"><h3 id="cardTitle">寿星已就位</h3><section class="hero-benefit"><small>BIRTHDAY BROADCAST / 本台好消息</small><strong id="cardBigWin">今天值得收到一点偏爱</strong><p id="cardLucky"></p></section><div class="card-grid"><section class="mini-block"><small>调频小杂音 / 别介意</small><p id="cardIncident"></p></section><section class="mini-block warning"><small>广播彩蛋 / 今日收下</small><p id="cardBenefit"></p></section></div><section class="action-strip"><small>ON AIR / 享受方式</small><p id="cardAction"></p></section></div></article></div><button class="draw-button" id="drawButton">收听寿星广播牌</button></div></div>
-      <div class="reaction-row" id="reactions"><button class="reaction" data-reaction="有共鸣">○ 有共鸣</button><button class="reaction" data-reaction="收下啦">✦ 收下啦</button><button class="reaction" id="lightButton">＋ 留一颗光点</button><button class="reaction" id="againButton">重新做一轮 ↻</button></div><p class="share-copy" id="shareCopy"></p>
+    <section class="screen" id="test">
+      <div class="test-wrap">
+        <div class="test-head"><div><div class="label">ROOT SBTI / 28 题</div><h2>把你的第一反应交出来。</h2></div><div class="counter" id="counter">01 / 28</div></div>
+        <div class="meter"><i id="meterFill"></i></div>
+        <div class="question-kicker" id="questionKicker">SCENE FREQUENCY</div>
+        <div class="question" id="questionText"></div><p class="question-note" id="questionNote"></p>
+        <div class="options" id="options"></div>
+        <div class="nav-row"><button class="text-btn" id="backBtn">← 回到上一题</button><span class="fine" style="margin:0">选项没有正确答案，只有你的产品脑回路。</span></div>
+      </div>
     </section>
-    <section class="wall" id="wall"><div class="section-top"><div><h2>寿星祝福墙</h2><p>把今天收到的偏爱，也留一点给正在庆生的同事。</p></div><div class="comfort" id="comfortValue">寿星能量值 · 24</div></div><div class="wall-grid"><article class="wall-card"><small>本机寿星领取次数</small><div class="big-number" id="wallDraws">0</div><p>每一次翻开，都是寿星收下的一份生日偏爱。</p></article><article class="wall-card"><small>寿星此刻的状态</small><div class="tag-cloud" id="tagCloud"><span class="tag">正在对齐</span><span class="tag">灵感加载中</span><span class="tag">想做舒服</span></div></article><article class="wall-card"><small>生日彩蛋 · 匿名祝福</small><div class="light-list" id="lightList"><div class="light">“今天的主角，先把自己的开心排在前面。”</div><div class="light">“愿你的认真，刚好被看见。”</div></div></article></div></section>
-    <footer>Cozy 寿星专属 · 今天的偏爱，只送给今天的寿星</footer>
-  </main>
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><h3 id="modalTitle">留一颗小光点</h3><p>写给一位可能正在忙碌的同事。将以匿名彩蛋的形式留在这台设备的观测墙里。</p><textarea id="lightInput" maxlength="30" placeholder="例如：今天不用每一件事都做到满格。" aria-label="匿名支持话"></textarea><div class="modal-actions"><button class="plain" id="closeModal">先不了</button><button class="submit" id="saveLight">放进观测墙</button></div></div></div>
+    <section class="screen" id="result">
+      <div class="result-card">
+        <div class="result-code" id="resultCode"></div><h2 id="resultTitle"></h2><p class="definition" id="definition"></p>
+        <div class="broadcast"><p id="broadcastText"></p></div>
+        <div class="modules"><article class="module"><h3>你的核武器</h3><p id="power"></p></article><article class="module"><h3>你的微疯时刻</h3><p id="chaos"></p></article><article class="module"><h3>团队使用说明</h3><p id="usage"></p></article><article class="module"><h3>本次专属彩蛋</h3><p id="easterEgg"></p></article></div>
+        <div class="cta-row" style="margin-top:28px"><button class="btn" id="copyBtn">复制我的广播卡</button><button class="btn alt" id="retestBtn">重新测试，不覆盖旧结果</button></div>
+        <div class="history" id="historyBox" hidden><h3>你保存过的其他频段</h3><div class="history-list" id="historyList"></div></div>
+      </div>
+    </section>
+    <footer class="footer">ROOT 新奶器产品业务线 · SBTI 是一场文化游戏，不是一份考核。</footer>
+  </main><div class="toast" id="toast"></div>
   <script>
-    const cards = [
-      ['零食有戏','可能会在点单页犹豫两分钟。','一口正中下怀的小快乐','你可能会遇到一份比预想更对胃口的食物，第一口就会让心情明显变好。','不是吃得多，而是终于吃到“对的那口”。','把今天想吃的东西留给自己，不必找理由。','自在'],
-      ['沙发封神','你可能暂时找不到最舒服的坐姿。','一个下午会舒服得很具体','随手打开的节目、毯子和安静的空白，可能刚好拼成一个不用出门也很满足的时段。','你会发现，快乐不一定要安排得很满。','给自己留半小时，什么都不完成也没关系。','自在'],
-      ['香气上线','可能会路过一阵让你停下来的香味。','会遇到一份好闻的偏爱','它可能来自咖啡、面包、洗衣液或路边的花；小小一瞬间，却会让今天变得有记忆点。','你的感官会先替你收下一点生日礼物。','慢一点走，让鼻子先选方向。','自在'],
-      ['旧物重逢','你可能会翻到一件以为不见了的小东西。','丢过的可爱，会回来','可能是一张票根、一副耳机、一个小饰品；它会让你突然想起某段轻松的时间。','今天适合把失而复得，当作小型庆祝。','随手整理一个抽屉，惊喜可能就在里面。','自在'],
-      ['睡前好眠','晚上可能会比平时晚一点躺下。','会拥有一段很沉的休息','关灯以后，脑子有机会比平常更快安静下来；明天醒来时，整个人会轻一点。','最实在的好运，是把自己睡回来。','睡前把手机放远一点，让房间先安静。','自在'],
-      ['甜品彩蛋','你可能会纠结要不要加一份甜的。','一份甜，会把心情拉高','今天适合拥有一个小小的“额外选择”；它不需要隆重，却很容易变成你回想起来会笑的片段。','寿星的偏爱，有时候就是多一口。','选那个你通常会犹豫、但今天最想要的。','自在'],
-      ['窗边放晴','窗外可能看起来没什么特别。','会遇到一段刚刚好的光','某个抬头的瞬间，阳光、云层或晚霞会让你想拍一张照。','普通的一天，也会给寿星安排一帧好看的画面。','有窗就去窗边站一分钟。','自在'],
-      ['被窝加冕','你可能会比计划更想赖一会儿。','休息会变成今天的正经事','这不是偷懒，而是生日当天的合理偏爱；放慢一点，心情反而更容易归位。','你会重新感到自己被照顾着。','把闹钟往后调一点，给自己多一点余量。','自在'],
-      ['转角有风','出门时可能会走错一个小路口。','会撞见更有意思的风景','绕出去的几分钟，可能让你遇到一间小店、一只可爱动物或一段很好听的街头声音。','偏离路线，反而容易收获彩蛋。','今天别把每一步都走得太赶。','出发'],
-      ['好天气签收','出门前你可能会犹豫要不要带伞。','天空会给你一个好脸色','你出门的那段时间，很可能刚好遇到舒服的风或适合拍照的光。','今天适合相信：出门会比想象中值得。','穿上让自己看起来最有精神的那件。','出发'],
-      ['小摊惊喜','你可能会在路边多看一眼。','会发现一件便宜又可爱的东西','可能是一束花、一张贴纸、一个玩偶或一份街边小吃；不贵，但很会哄人开心。','今天的生日礼物，可能藏在最不隆重的地方。','给“随便看看”留十分钟。','出发'],
-      ['散步加分','走着走着可能会有点不想继续。','越走越轻松的时刻要来了','当你不再盯着目的地，路边的树、风和声音反而会把心情慢慢带起来。','你会收获一种“原来我出来是对的”的轻快。','选一条没走过的小路。','出发'],
-      ['偶遇可爱','你可能会被一个小动静吸引。','会遇到值得分享的可爱瞬间','一只猫、一只狗、一个小朋友的笑声，或任何让你忍不住想发给朋友的画面。','今天适合被没有道理的可爱击中。','耳机先摘一边，留意周围。','出发'],
-      ['照片很灵','你可能会觉得今天不太上镜。','会拍到一张自己真心喜欢的照片','不用很会摆姿势；一个自然表情、一道光或身边的人，就能让这张照片变得有纪念感。','生日当天的你，本来就值得被好好记录。','给自己拍一张，不用马上发。','出发'],
-      ['路线偏航','原本想去的地方可能刚好人有点多。','临时换的地方会更对味','计划B可能没有那么有名，却更安静、更好坐，也更适合今天的心情。','你会发现，临时改变不等于扫兴。','相信第二选择，它可能就是今天的隐藏款。','出发'],
-      ['夜色加分','傍晚出门时可能会有一点懒得动。','晚上的空气会帮你换心情','夜风、街灯和不赶时间的步子，会让普通行程变得有一点电影感。','今天会有一个“幸好我出来了”的瞬间。','把回家的路线放慢一点。','出发'],
-      ['好友来电','手机可能会安静一阵。','会等到一条让你笑出来的消息','它可能不是什么大事，只是一句生日快乐、一个表情包或一段突然想起你的分享。','被人惦记，是很直白的生日好运。','别急着把通知静音。','热闹'],
-      ['聊天上头','开头可能只是随口聊两句。','会聊到忘记看时间','一段轻松的对话会突然变得很有意思，让你感到“原来有人真的懂这个笑点”。','今天适合收下一场没有目的的开心聊天。','把想分享的小事发给那个会接梗的人。','热闹'],
-      ['收到邀请','你可能会觉得今天没人约。','一个临时邀约可能刚刚好','可能是吃饭、散步、打游戏或去逛一圈；不用盛大，重点是有人想和你共享今天。','寿星不一定要办大局，也可以被自然地带进快乐里。','给“要不要出来”一个肯定的机会。','热闹'],
-      ['笑点对上','你可能会先觉得场面有点普通。','会遇到一个笑到停不下来的瞬间','某个离谱视频、朋友的模仿或突然的乌龙，会让今天的快乐很不讲道理。','你会收获一段以后想起来还会笑的记忆。','别忍，笑出来就对了。','热闹'],
-      ['有人懂你','你可能懒得解释自己的小偏好。','会遇到一个不用解释的默契','有人会刚好知道你爱什么、讨厌什么，或主动把你喜欢的那部分留给你。','今天的好运，是被准确地偏爱。','接受那份好意，别急着说“不用”。','热闹'],
-      ['久违问候','你可能会想起一个很久没聊的人。','一段旧关系会轻轻回暖','不一定是长谈，一句“生日快乐”或一个表情，就够让彼此重新连上。','被记得这件事，本身就很珍贵。','如果想到谁，就发一条简单的消息。','热闹'],
-      ['快乐合影','你可能会觉得拍照有点麻烦。','会留下比预期更好看的合照','不是精修的那种好看，而是每个人都很松弛、回头看会觉得真快乐的画面。','今天适合留下一张有人的生日证据。','遇到喜欢的人，就说“拍一张吧”。','热闹'],
-      ['小局有你','你可能担心自己融不进去。','会在一个小圈子里被自然接住','不需要特别会表现，你只要在场，就会有人把话题、零食或笑点分给你。','寿星今天不用努力合群，也会有位置。','去坐你最想坐的那个位置。','热闹'],
-      ['歌单命中','随机播放可能先跳过两首。','下一首会刚好戳中你','它可能不是新歌，却会在今天听起来特别对，让你想把音量调大一点。','你会拥有一段专属自己的背景音乐。','把随机播放交给今天。','灵光'],
-      ['审美在线','你可能会对穿什么犹豫一下。','今天会有“我看起来不错”的时刻','不是别人必须夸你，而是你自己照镜子时会觉得：嗯，这就是今天该有的样子。','生日当天的好状态，会从一点自我喜欢开始。','选那件让你走路会更有劲的衣服。','灵光'],
-      ['电影正好','你可能会在片单里挑很久。','会看见一句刚好击中你的台词','它不一定改变什么，但会让你觉得“原来有人也这样想过”。','今天适合被一个故事温柔地陪一下。','选一部你收藏很久、却没点开的。','灵光'],
-      ['手作上头','一开始可能觉得自己做得不够好。','会做出一个舍不得丢的小东西','涂鸦、拼图、烘焙、贴纸或任何小手作，都会给今天留下一点亲手完成的快乐。','不完美的成品，才最像生日当天。','随便开始，别先评价。','灵光'],
-      ['愿望可爱','你可能会不好意思说出真正想要的。','一个小愿望会变得更清楚','它未必马上实现，但你会突然知道：我其实很想要这个。','能认真喜欢一件小事，就是很好的生日开场。','把那个愿望写进备忘录。','灵光'],
-      ['夜晚发亮','今晚可能看起来和其他晚上没区别。','会有一个只属于你的发光瞬间','可能是灯光、屏幕、生日蛋糕上的一点火，或你忽然对自己笑了一下。','今天值得被记住，不必很轰烈。','睡前留一分钟，想想今天最可爱的片段。','灵光']
-    ].map(([title,incident,win,detail,benefit,move,category])=>({title,incident,win,detail,benefit,move,category}));
-    const $ = id => document.getElementById(id); let current=null, clues=[], quizIndex=0;
-    const savedState = JSON.parse(localStorage.getItem('cozyObservation') || '{}');
-    const state = {draws:0, lights:[], reactions:0, lastResult:null, ...savedState};
-    const questions = [
-      {q:'寿星今天最想把时间花在哪里？',hint:'选一个最像你真实状态的频道。',answers:[['在家舒服待着，什么都不赶','自在'],['出门走走，看看城市会给什么彩蛋','出发'],['和喜欢的人见面、聊天、热闹一下','热闹'],['沉进音乐、电影或自己的小世界','灵光']]},
-      {q:'如果现在有一张“随便去哪都可以”的小票，你会选？',hint:'不需要合理，寿星的第一反应最重要。',answers:[['去买喜欢的吃的，然后立刻回家','自在'],['坐一段没坐过的车，去陌生街区晃晃','出发'],['约一个最会接梗的人出来','热闹'],['去书店、展览或电影院待一会儿','灵光']]},
-      {q:'今天的生日小奖励，你最想收到哪一种？',hint:'只选你自己真会开心的。',answers:[['一份刚刚好的零食或甜品','自在'],['一段好天气和随意的散步','出发'],['一条让你笑出来的消息','热闹'],['一首一听就对味的歌','灵光']]},
-      {q:'周末突然空出来一个下午，你会怎么过？',hint:'不用把它安排得很有意义。',answers:[['关上门，睡觉、追剧、发呆','自在'],['背上包就出门，不预设目的地','出发'],['拉人吃饭，聊到忘记时间','热闹'],['做点手工、拍照或整理灵感','灵光']]},
-      {q:'走在路上时，什么最容易让你停下来？',hint:'选会让你忍不住多看一眼的那个。',answers:[['闻起来很香的小店','自在'],['一条看起来很好走的小路','出发'],['一群正在笑的人','热闹'],['一束特别好看的光或颜色','灵光']]},
-      {q:'你的手机相册里，最想多一点什么？',hint:'这一题只关心你喜欢记录什么。',answers:[['自己把日子过舒服的小瞬间','自在'],['偶然遇到的城市、天空和风景','出发'],['和朋友没摆拍的快乐合影','热闹'],['一眼就想保存的画面和文字','灵光']]},
-      {q:'如果今晚只能保留一种氛围，你选？',hint:'它会决定寿星广播的调频方向。',answers:[['被窝、热饮和安静的房间','自在'],['夜风、街灯和慢慢走回家','出发'],['有人陪着乱聊、一起大笑','热闹'],['耳机里循环一首喜欢的歌','灵光']]},
-      {q:'遇到一个小惊喜时，你更想怎么处理？',hint:'选最像你“快乐被击中”时的样子。',answers:[['自己悄悄享受，不急着告诉别人','自在'],['马上出门去找下一个惊喜','出发'],['第一时间发给朋友，一起笑','热闹'],['拍下来、记下来，留成纪念','灵光']]},
-      {q:'生日当天，你最希望谁来给你一点偏爱？',hint:'可以是人，也可以是今天的世界。',answers:[['自己，先把舒服和开心放前面','自在'],['路上偶遇的天气、风景和陌生可爱','出发'],['朋友、家人和刚好想起你的人','热闹'],['音乐、故事和你自己的好心情','灵光']]},
-      {q:'如果有一件好事正在靠近，你希望它更像什么？',hint:'最后一题，选最让你心动的生日彩蛋。',answers:[['一段不用解释、就很舒服的独处','自在'],['一场临时决定却特别值的外出','出发'],['一份来自别人的真诚惦记','热闹'],['一个让你觉得“今天真好”的瞬间','灵光']]}
-    ];
-    function persist(){ localStorage.setItem('cozyObservation', JSON.stringify(state)); }
-    function answerSignature(){ return clues.join('|'); }
-    function stableHash(text){ let hash=2166136261; for(let i=0;i<text.length;i++){ hash^=text.charCodeAt(i); hash=Math.imul(hash,16777619); } return hash>>>0; }
-    function leadCategory(){ const order=['自在','出发','热闹','灵光']; const score=clues.reduce((map,key)=>{map[key]=(map[key]||0)+1; return map;},{}); return order.sort((a,b)=>(score[b]||0)-(score[a]||0))[0]; }
-    function updateResumeButton(){ const last=state.lastResult; const button=$('resumeButton'); if(last && Array.isArray(last.clues) && last.clues.length===questions.length){ button.classList.add('show'); button.textContent=`↻ 继续查看上次的寿星卡「${last.cardTitle}」`; } else { button.classList.remove('show'); } }
-    function updateWall(){ $('drawCount').textContent=`寿星已领取 ${state.draws} 次`; $('wallDraws').textContent=state.draws; $('comfortValue').textContent=`寿星能量值 · ${24 + state.draws + state.reactions + state.lights.length}`; const list=$('lightList'); const defaults=['“今天的主角，先把自己的开心排在前面。”','“愿你的认真，刚好被看见。”']; list.innerHTML=[...state.lights.slice(-3).reverse().map(x=>`<div class="light">“${escapeHtml(x)}”</div>`),...defaults].slice(0,3).join(''); }
-    function escapeHtml(str){ return str.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-    function renderQuestion(){ const item=questions[quizIndex]; const dots=questions.map((_,i)=>`<i class="${i<quizIndex?'on':''}"></i>`).join(''); $('questionCard').innerHTML=`<div class="question-top"><span>寿星频道 ${String(quizIndex+1).padStart(2,'0')} / ${String(questions.length).padStart(2,'0')}</span><span class="clue-dots">${dots}</span></div><h2>${item.q}</h2><p>${item.hint}</p><div class="answer-list">${item.answers.map(([text,category])=>`<button class="answer" data-category="${category}">${text}<small>选最想过的那种生活片段</small></button>`).join('')}</div><p class="mystery-note">✦ 这些选择不会被逐条解释，它们只负责把寿星广播调到更对味的频道。</p>`; document.querySelectorAll('.answer').forEach(btn=>btn.addEventListener('click',()=>{ clues.push(btn.dataset.category); quizIndex++; if(quizIndex<questions.length) renderQuestion(); else finishQuiz(); })); }
-    function finishQuiz(){ $('quiz').classList.remove('active'); $('game').classList.add('active'); $('game').scrollIntoView({behavior:'smooth',block:'start'}); }
-    function pickCard(){ const signature=answerSignature(); const category=leadCategory(); const pool=cards.filter(card=>card.category===category); current=pool[stableHash(signature)%pool.length]; $('cardTitle').textContent=current.title; $('cardBigWin').textContent=current.win; $('cardLucky').textContent=current.detail; $('cardIncident').textContent=current.incident; $('cardBenefit').textContent=current.benefit; $('cardAction').textContent=current.move; $('cardCategory').textContent=current.category.toUpperCase()+' · BIRTHDAY RADIO'; }
-    function rememberResult(){ state.lastResult={signature:answerSignature(), clues:[...clues], cardTitle:current.title, savedAt:Date.now()}; persist(); updateResumeButton(); }
-    function draw(){ const card=$('drawCard'); if(card.classList.contains('flipped')) { $('shareCopy').textContent=`同一组频道选择，会稳定收到「${current.title}」。想换一张广播牌，请重新调频。`; return; } pickCard(); card.classList.add('flipped'); $('drawButton').textContent='同一频道 · 广播牌固定'; $('reactions').classList.add('show'); state.draws++; rememberResult(); updateWall(); }
-    function startQuiz(){ clues=[]; quizIndex=0; $('drawCard').classList.remove('flipped'); $('reactions').classList.remove('show'); $('drawButton').textContent='收听寿星广播牌'; $('shareCopy').textContent=''; $('game').classList.remove('active'); $('quiz').classList.add('active'); renderQuestion(); $('quiz').scrollIntoView({behavior:'smooth',block:'start'}); }
-    function resumeLastResult(){ const last=state.lastResult; if(!last) return; clues=[...last.clues]; $('quiz').classList.remove('active'); $('game').classList.add('active'); $('drawCard').classList.remove('flipped'); $('reactions').classList.remove('show'); pickCard(); $('drawCard').classList.add('flipped'); $('drawButton').textContent='同一频道 · 广播牌固定'; $('reactions').classList.add('show'); $('shareCopy').textContent='已恢复上次寿星广播：同一组频道选择，会一直对应同一张广播牌。'; $('game').scrollIntoView({behavior:'smooth',block:'start'}); }
-    $('startGame').addEventListener('click',startQuiz); $('resumeButton').addEventListener('click',resumeLastResult); $('drawButton').addEventListener('click',draw); $('drawCard').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON' && !$('drawCard').classList.contains('flipped')) draw();}); $('againButton').addEventListener('click',startQuiz);
-    document.querySelectorAll('[data-reaction]').forEach(btn=>btn.addEventListener('click',()=>{btn.classList.toggle('active'); state.reactions++; persist(); updateWall(); $('shareCopy').textContent='这份共鸣，已经悄悄放进今天的观测里。';}));
-    $('lightButton').addEventListener('click',()=>{$('modal').classList.add('open'); $('lightInput').focus();}); $('closeModal').addEventListener('click',()=> $('modal').classList.remove('open')); $('modal').addEventListener('click',e=>{if(e.target===$('modal')) $('modal').classList.remove('open');}); $('saveLight').addEventListener('click',()=>{const val=$('lightInput').value.trim(); if(!val){$('lightInput').focus(); return;} state.lights.push(val); persist(); updateWall(); $('lightInput').value=''; $('modal').classList.remove('open'); $('shareCopy').textContent='这颗小光点已留在观测墙，等着被同事遇见。';}); updateWall(); updateResumeButton();
+  const questions=[
+    ['SC','当一位妈妈说“晚上真的不想再折腾了”，你先被什么击中？','别分析太久，选先跳出来的那个。','S','她说这句话时的疲惫感，以及被理解的那一秒。','C','这句话背后，哪一步让她多折腾了一次。'],
+    ['SC','面对一长段用户反馈，你更想先怎么处理？','都是有效路径，只看你的本能入口。','S','圈出那些有画面感的原话，先把她当时的状态听清。','C','按场景、动作、时间和阻碍重新排成一张逻辑图。'],
+    ['SC','一个体验瞬间让你记了很久，通常是因为？','别装理性，产品人也有感受器。','S','它让人感觉“终于有人懂我”。','C','它精准消掉了流程里一个原本绕不开的麻烦。'],
+    ['SC','你听到“这里不太舒服”时，第一追问更像哪句？','这里的舒服，既有感受也有结构。','S','“是压迫感、别扭感，还是那种说不上来的不自在？”','C','“发生在第几步、持续多久、和什么条件有关？”'],
+    ['SC','一次好体验最先留在你脑中的是什么？','场景派和结构派，都在为用户开路。','S','一句用户会脱口而出的“啊，这就对了”。','C','一条不用多想就能顺着完成的动作链。'],
+    ['SC','有人夸一个功能“很喜欢”，你更关心？','“喜欢”不是结尾，是新问题的起点。','S','它给她带来了什么轻松、安心或被照顾的感觉。','C','她为什么会在这个时刻用它，以及是否能稳定复现。'],
+    ['SC','如果只能给“被理解”写一句注释，你会写？','最后一题，锁定你的感知频道。','S','“她的情绪和生活节奏被看见了。”','C','“她想做的事被顺利完成了。”'],
+    ['BR','遇到一个不顺手的小摩擦，你更容易？','这不是冒险题，是你的改造节奏。','B','先想一个没见过的解法，把旧路径掀开看看。','R','先把现有路径磨顺，让它稳定少出岔子。'],
+    ['BR','你对“新品感”的理想定义更接近？','两种答案都能做出好产品。','B','让人第一次用就想说：原来还能这样。','R','让人用完只想说：终于不用费劲了。'],
+    ['BR','当一个点子很亮、但还很糊，你会？','灵感和收口，都是产品的燃料。','B','先把它做成粗糙原型，让大家看到那束光。','R','先把最关键的边界收紧，确保第一版能站住。'],
+    ['BR','面对既有规则，你的默认姿势是？','规则有时是护栏，有时是待拆的围栏。','B','礼貌地问一句：我们能不能换个玩法？','R','先理解它为什么存在，再决定哪里值得动。'],
+    ['BR','让你最有成就感的时刻更像？','选你更想截图纪念的一幕。','B','一个原本不可能的体验突然有了雏形。','R','一个原本反复卡人的细节终于不再硌手。'],
+    ['BR','当别人说“这个会不会太新了”，你更可能？','不是站队，是表达你的动作风格。','B','眼睛一亮：那就更值得做一版试试看。','R','拿起笔：先把“新”会带来的不确定性写明。'],
+    ['BR','你想交付的变化，最像哪一种？','最后一题，选你的改造签名。','B','给用户一个以前没拥有过的惊喜瞬间。','R','把她已经在做的事，变得更轻、更稳、更安心。'],
+    ['TF','面对一个模糊问题，你会先？','没有谁更强，只是上线方式不同。','T','拉两三个脑回路不同的人，先碰出火花。','F','自己安静写一版粗方案，带着东西再聊。'],
+    ['TF','讨论出现分歧时，你通常？','请按真实习惯作答，别选“理想中的我”。','T','越聊越来电，想把不同视角都接进来。','F','先沉默一下，把自己的主线想完整。'],
+    ['TF','一个点子在什么状态下最适合拿出来？','产品脑有两种开麦方式。','T','半成品也行，先让它在桌面上长出新枝。','F','骨架已经清楚，再让它接受外部冲击。'],
+    ['TF','你最怕团队漏掉什么？','担心点本身没有对错。','T','有人看到了不同需求，却没有机会说出来。','F','大家聊得很热闹，但没人把主线推下去。'],
+    ['TF','灵感突然来了，你第一反应？','不用优雅，选最像你的动作。','T','马上发给人：你听我说这个是不是很有意思？','F','先记进自己的备忘录，等它长出更多细节。'],
+    ['TF','当要做一个艰难选择时，你更相信？','集体感和行动感，都很珍贵。','T','多听几种真实声音后形成的共识感。','F','自己反复推过后，那条最清楚的行动线。'],
+    ['TF','在一场高能协作里，你更像？','最后一题，锁定你的协作信号。','T','把不同频道接上，让火花留在现场的人。','F','把散开的讨论收成下一步的人。'],
+    ['ID','一个方案刚冒出来，你最先依赖？','直觉和证据，都可以是好起点。','I','“我感觉它会成立”的整体判断。','D','已经出现的反馈、现象或可验证的线索。'],
+    ['ID','你会在什么时候说“先做一点看看”？','请听第一反应，不必组织语言。','I','当它的方向感已经足够让我心动。','D','当我们知道要观察什么、如何判断它好不好。'],
+    ['ID','面对一个暂时讲不清的选择，你更容易？','看不见的感觉与看得见的依据，都有价值。','I','保留那股“这里有东西”的感觉，继续往里走。','D','先停一下，补齐能让人一起确认的理由。'],
+    ['ID','你更愿意为哪种信号下注？','不是下注金额，是你信任的方向。','I','一个很少见但非常有力量的瞬间。','D','几个独立出现、指向同一件事的现象。'],
+    ['ID','捕捉到一个新趋势时，你通常？','潮水来了，怎么判断由你决定。','I','先顺着感觉想象它会把生活带到哪里。','D','先确认它不是偶然，再判断它是否值得进场。'],
+    ['ID','你最想守住的产品判断是？','最后一题，别想成答辩。','I','“我知道现在还讲不全，但它就是有劲。”','D','“我们说得清，它为什么值得被做出来。”'],
+    ['ID','当有人问“凭什么是这个方案”，你内心更想说？','答案会成为你的最终签名。','I','“因为它一出现，那个未来就变得很具体。”','D','“因为它经得起追问，也找得到落点。”']
+  ];
+  const profiles={
+    SBTI:['乳泵宇宙主播','你把用户场景、猛烈新意、群体火花和直觉雷达同时开到最大。','你能把一句“晚上不想折腾”翻译成全团队都看得见的未来体验。','灵感一来，你脑内已经完成了发布会、海报和用户尖叫的三连播。','先让你把体验愿景讲到人有画面，再配一个能把落地节奏稳住的搭子。','今天你适合把一个“不知道为什么但很对”的念头，画成一张图。'],
+    SBTD:['体验证据魔法师','你很会把细腻感受变成可被讨论、验证并被记住的体验方向。','既听得见用户的情绪，又拿得出让所有人点头的依据。','你会把一句感叹号拆成场景、动作和证据，但依然保留它的温度。','请给你一段原始用户语言和一个观察目标；你会把两者接成桥。','今天你的一句“我有证据，但它也很有感觉”，可能特别有说服力。'],
+    SBFI:['新品野路子导演','你相信用户体验不必按旧剧本走，而且敢独自把第一幕拍出来。','把模糊情绪变成出人意料的新路径，是你的拿手戏。','越有人说“这也太跳了吧”，你越想给它配一段登场 BGM。','先允许你野路子地出一版，再找人帮你挑出最值得保留的亮点。','今天请认真保存一个离谱但迷人的念头，它可能不是路过。'],
+    SBFD:['爆改前的证据贩子','你有推翻旧体验的胆子，也有让新方向站得住的耐心。','你擅长把“想换个玩法”变成一条有根据、可试验的新路。','你一边想把桌子掀了，一边已经在给新桌子量尺寸。','让你负责第一版实验假设，会同时收获意外和安全感。','今天的好运：你可能会找到一个让“大胆”不显得冒险的理由。'],
+    SRTI:['温柔打磨社交核','你用团队的火花，持续把用户的细小不适磨成轻松。','你最厉害的不是声音大，而是让大家一起把“舒服”做具体。','你能把一场讨论聊得像朋友夜宵，却在结尾留下清晰下一步。','让你在早期拉人碰一碰；你的共感力会让细节自己浮出来。','今天很适合问一句“这一步会不会让人多累一点？”答案常有料。'],
+    SRTD:['妈妈场景质检官','你对用户生活的敏感，配上稳定证据，像一盏不会误亮的灯。','你能守住那些看似很小、实际很影响安心感的体验细节。','别人看到功能，你已经在脑补她凌晨、通勤和手忙脚乱时会怎样。','请把真实场景交给你，你会把“差不多”拦在体验门外。','今天你留意到的一个小别扭，可能正是别人没说出口的重点。'],
+    SRFI:['静音造物主','你安静收集感受，稳定打磨，最后端出一个让人想说“正合适”的作品。','你对舒服的理解很具体：不是炫，是恰好替用户省下力气。','你不抢麦，但会在深夜把一个模糊问题磨到发光。','给你一段不被打断的思考时间，再让成品自己开麦。','今天适合把一件常用小物调整得更顺手，你会获得微型掌控感。'],
+    SRFD:['体验秩序守门人','你用细腻的用户感受和可靠的判断，守住产品最重要的安心区。','你能识别“看似没问题”里，那一点会让人不想再用的别扭。','你的脑内有一支体验巡逻队，专抓那些没被说出口的小麻烦。','让你做体验关键点的最后一看，团队会少很多“怎么没人发现”。','今天你可能会替未来的某个人提前避开一个很小、但很烦的坑。'],
+    CBTI:['产品架构造浪者','你能把复杂流程、全新思路、群体能量和直觉魄力一次拉到同一张蓝图上。','别人还在找入口，你已经给新世界搭好了入口、动线和彩蛋。','你讲话像在开产品宇宙发布会，但手上真的有结构图。','让你先把大框架扔上墙，再让团队一起把它推向更大胆的地方。','今天一个看起来跨度很大的连接，可能会突然变得合理。'],
+    CBTD:['系统派体验侦探','你能在复杂里找规律，在新方向里找证据，并把全员带到同一张地图。','你的超能力是让“听起来很酷”顺利变成“原来真的做得到”。','你会为一条新路开灯、拉线、做路标，最后再确认大家都能走。','适合把你放在探索型项目的中段：你能让灵感开始拥有骨架。','今天你会很容易发现：两个零散现象其实在讲同一件事。'],
+    CBFI:['一人开团工程师','你独立、敢改、结构感强；不等世界给你答案，自己先搭一座能走的桥。','你能把一个复杂问题压缩成清晰骨架，再塞进令人意外的新玩法。','你看起来安静，脑内却常驻一支不下班的产品施工队。','先给你一个难题和充分空间；等你回来，带回来的往往不止一个答案。','今天你适合把一个脑内草图写成三行，它会比想象中更能打。'],
+    CBFD:['逻辑满格改造师','你敢于更新旧系统，也坚持每一次改变都应该说得明白、落得下去。','你是“大胆”最可靠的同伙：不是盲冲，而是有逻辑地重写规则。','你会在脑内开拆迁队之前，先把新楼的承重墙算明白。','找你做复杂问题的第一版拆解，团队会获得一种很具体的底气。','今天你提出的一个“那我们换个结构呢”，很可能会打开新空间。'],
+    CRTI:['流程里的温柔反骨','你看得懂结构、守得住用户、也愿意拉着大家一起把旧流程拧出新花样。','你擅长让系统不那么冷，让协作不那么绕。','你会一边说“这里有依赖关系”，一边认真替用户争取一次更轻的点击。','让你连接不同角色；你能让每个人都知道改变为什么值得。','今天适合把一个“流程就是这样”的说法，温柔地问一遍为什么。'],
+    CRTD:['稳定感总设计师','你是复杂体验里的压舱石：有结构、有依据，也始终把用户的感受放在中心。','你能让团队知道，真正的稳定不是保守，而是用户每次都能被好好接住。','你的快乐可能来自一张清晰流程图，以及它真的让人少皱一次眉。','让你把关关键路径，产品会多一份不声张但很硬的可靠。','今天一个被你理顺的小环节，会替某个人省下一点真实精力。'],
+    CRFI:['安静但很能打的产品体','你不靠声量证明自己：独立、稳健、结构清晰，还保留恰到好处的用户敏感。','你能在无人注意时把复杂问题打磨成一条自然得像本该如此的路径。','你表面像省电模式，实际后台开着高性能产品引擎。','别催你的第一反应，给你足够上下文和空间，成品会自己说话。','今天你安静完成的一件小事，可能会比热闹讨论更接近答案。'],
+    CRFD:['体验宇宙校准仪','你用结构、证据和对细节的耐心，持续把体验调到最可靠的位置。','你的存在让产品不只“能用”，而是每次都更接近让人安心地用。','你的脑内像有一台体验校准仪，偏一毫米都逃不过。','请在关键体验节点找你；你会把隐藏的不确定性一项项调回正轨。','今天你会特别适合给一个模糊判断补上一条清楚的依据。']
+  };
+  const $=id=>document.getElementById(id), screens=['landing','test','result'];let answers=[],index=0;const storeKey='root-sbti-v1';
+  function switchScreen(id){screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo({top:0,behavior:'smooth'})}
+  function renderQuestion(){const q=questions[index];$('counter').textContent=String(index+1).padStart(2,'0')+' / 28';$('meterFill').style.width=((index+1)/questions.length*100)+'%';$('questionKicker').textContent={SC:'SCENE × STRUCTURE',BR:'BREAK × REFINE',TF:'TOGETHER × FOCUS',ID:'INTUITION × DATA'}[q[0]];$('questionText').textContent=q[1];$('questionNote').textContent=q[2];$('options').innerHTML='';[[q[3],q[4]],[q[5],q[6]]].forEach(([letter,text])=>{const b=document.createElement('button');b.className='option';b.innerHTML='<b>'+letter+'</b><span>'+text+'</span>';b.onclick=()=>choose(letter);$('options').appendChild(b)});$('backBtn').disabled=index===0;$('backBtn').style.opacity=index===0?.35:1}
+  function choose(letter){answers[index]=letter;if(index<questions.length-1){index++;renderQuestion()}else showResult(calculateType(),answers)}
+  function calculateType(){const dimensions=[['S','C'],['B','R'],['T','F'],['I','D']];return dimensions.map(([a,b])=>answers.filter(x=>x===a).length>answers.filter(x=>x===b).length?a:b).join('')}
+  function saveResult(type,currentAnswers){const signature=currentAnswers.join('');const data=JSON.parse(localStorage.getItem(storeKey)||'{"history":[]}');const record={type,signature,at:new Date().toISOString()};data.last=record;data.history=[record,...(data.history||[]).filter(item=>item.signature!==signature)].slice(0,3);localStorage.setItem(storeKey,JSON.stringify(data));updateResume()}
+  function broadcast(type,p){return '【ROOT SBTI 广播】\\n我是 '+type+' · '+p[0]+'。\\n'+p[1]+'\\n核武器：'+p[2]+'\\n团队使用说明：'+p[4]+'\\n—— 新奶器产品业务线，频段已锁定。'}
+  function showResult(type,currentAnswers,restored=false){const p=profiles[type];if(!restored)saveResult(type,currentAnswers);$('resultCode').textContent='YOUR TYPE · '+type;$('resultTitle').innerHTML=p[0].split(' ').join('<em> ')+'</em>';$('definition').textContent=p[1];$('broadcastText').textContent='你已锁定：'+type+' · '+p[0]+'。'+p[1];$('power').textContent=p[2];$('chaos').textContent=p[3];$('usage').textContent=p[4];$('easterEgg').textContent=p[5];$('copyBtn').onclick=()=>copyText(broadcast(type,p));renderHistory();switchScreen('result')}
+  function renderHistory(){const data=JSON.parse(localStorage.getItem(storeKey)||'{"history":[]}');const list=data.history||[];$('historyBox').hidden=list.length<2;$('historyList').innerHTML=list.map((r,i)=>'<span class="history-chip">'+(i===0?'本次 / ':'旧存档 / ')+r.type+' · '+profiles[r.type][0]+'</span>').join('')}
+  function updateResume(){const data=JSON.parse(localStorage.getItem(storeKey)||'{}');$('resumeBtn').hidden=!data.last}
+  function copyText(text){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>toast('广播卡已复制，去显摆一下。')).catch(()=>toast('复制失败，稍后再试。'))}else toast('当前浏览器不支持一键复制。')}
+  let toastTimer;function toast(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2600)}
+  $('startBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('backBtn').onclick=()=>{if(index){index--;renderQuestion()}};$('retestBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('resumeBtn').onclick=()=>{const data=JSON.parse(localStorage.getItem(storeKey)||'{}');if(data.last)showResult(data.last.type,data.last.signature.split(''),true)};updateResume();
   </script>
 </body>
 </html>
