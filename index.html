@@ -11,6 +11,7 @@
     .avatar{background-color:var(--avatar-bg,#f4efff);border-radius:26px;box-shadow:6px 6px 0 var(--avatar-accent,var(--coral))}
     .avatar:before,.avatar:after,.avatar .face{display:none}
     .sprite-portrait{position:absolute;z-index:0;left:0;top:0;width:400%;height:400%;max-width:none;transform-origin:0 0}
+    .quiz-actions{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;color:var(--muted);font-size:12px;line-height:1.5}.back-btn{border:2px solid var(--ink);background:#fff;padding:10px 13px;font-weight:900;color:var(--ink);box-shadow:3px 3px 0 var(--coral)}.back-btn:hover{background:var(--mint)}.back-btn[hidden]{display:none}@media(max-width:650px){.quiz-actions{align-items:flex-start;flex-direction:column}}
     .avatar .token{right:7px;bottom:7px;background:rgba(255,255,255,.94);border-radius:5px}
     .share-panel .mini-avatar{border-radius:18px}
   </style>
@@ -35,7 +36,7 @@
         <div class="question-kicker" id="questionKicker">SCENE FREQUENCY</div>
         <div class="question" id="questionText"></div><p class="question-note" id="questionNote"></p>
         <div class="options" id="options"></div>
-        <p class="test-tip">四种反应都成立。别挑“最正确”的，挑最像你的。</p>
+        <div class="quiz-actions"><button class="back-btn" id="backBtn" type="button">← 返回上一题</button><span>四种反应都成立。别挑“最正确”的，挑最像你的。</span></div>
       </div>
     </section>
     <section class="screen" id="result">
@@ -51,6 +52,7 @@
     </section>
     <footer class="footer">ROOT 新奶器产品业务线 · SBTI 是一场文化游戏，不是一份考核。</footer>
   </main><div class="toast" id="toast"></div>
+  <script src="assets/sbti-character-atlas.js"></script>
   <script>
   const questions=[
     ['SC','当一位妈妈说“晚上真的不想再折腾了”，你先被什么击中？','别分析太久，选先跳出来的那个。','S','她说这句话时的疲惫感，以及被理解的那一秒。','C','这句话背后，哪一步让她多折腾了一次。'],
@@ -77,9 +79,7 @@
     ['ID','一个方案刚冒出来，你最先依赖？','直觉和证据，都可以是好起点。','I','“我感觉它会成立”的整体判断。','D','已经出现的反馈、现象或可验证的线索。'],
     ['ID','你会在什么时候说“先做一点看看”？','请听第一反应，不必组织语言。','I','当它的方向感已经足够让我心动。','D','当我们知道要观察什么、如何判断它好不好。'],
     ['ID','面对一个暂时讲不清的选择，你更容易？','看不见的感觉与看得见的依据，都有价值。','I','保留那股“这里有东西”的感觉，继续往里走。','D','先停一下，补齐能让人一起确认的理由。'],
-    ['ID','你更愿意为哪种信号下注？','不是下注金额，是你信任的方向。','I','一个很少见但非常有力量的瞬间。','D','几个独立出现、指向同一件事的现象。'],
-    ['ID','捕捉到一个新趋势时，你通常？','潮水来了，怎么判断由你决定。','I','先顺着感觉想象它会把生活带到哪里。','D','先确认它不是偶然，再判断它是否值得进场。'],
-    ['ID','你最想守住的产品判断是？','最后一题，别想成答辩。','I','“我知道现在还讲不全，但它就是有劲。”','D','“我们说得清，它为什么值得被做出来。”'],
+    ['ID','你更愿意为哪种信号下注？','不是下注金额，是你信任的方向。','I','一个很少见…98 tokens truncated…答辩。','I','“我知道现在还讲不全，但它就是有劲。”','D','“我们说得清，它为什么值得被做出来。”'],
     ['ID','当有人问“凭什么是这个方案”，你内心更想说？','答案会成为你的最终签名。','I','“因为它一出现，那个未来就变得很具体。”','D','“因为它经得起追问，也找得到落点。”']
   ];
   const optionVariants={
@@ -158,17 +158,17 @@
   };
   const $=id=>document.getElementById(id), screens=['landing','test','result'];let answers=[],index=0;const storeKey='root-sbti-v1';
   function switchScreen(id){screens.forEach(s=>$(s).classList.toggle('active',s===id));window.scrollTo({top:0,behavior:'smooth'})}
-  function renderQuestion(){const q=questions[index];const axisIndex=questions.slice(0,index).filter(item=>item[0]===q[0]).length;const extras=optionVariants[q[0]][axisIndex];const choices=[[q[3],q[4]],[q[5],q[6]],[extras[0],extras[1]],[extras[2],extras[3]]];$('counter').textContent=String(index+1).padStart(2,'0')+' / 28';$('meterFill').style.width=((index+1)/questions.length*100)+'%';$('questionKicker').textContent={SC:'SCENE × STRUCTURE',BR:'BREAK × REFINE',TF:'TOGETHER × FOCUS',ID:'INTUITION × DATA'}[q[0]];$('questionText').textContent=q[1];$('questionNote').textContent=q[2];$('options').innerHTML='';choices.forEach(([letter,text],choiceIndex)=>{const b=document.createElement('button');b.className='option';b.innerHTML='<b>RESPONSE 0'+(choiceIndex+1)+'</b><span>'+text+'</span>';b.onclick=()=>choose(letter);$('options').appendChild(b)})}
+  function renderQuestion(){const q=questions[index];const axisIndex=questions.slice(0,index).filter(item=>item[0]===q[0]).length;const extras=optionVariants[q[0]][axisIndex];const choices=[[q[3],q[4]],[q[5],q[6]],[extras[0],extras[1]],[extras[2],extras[3]]];$('counter').textContent=String(index+1).padStart(2,'0')+' / 28';$('meterFill').style.width=((index+1)/questions.length*100)+'%';$('questionKicker').textContent={SC:'SCENE × STRUCTURE',BR:'BREAK × REFINE',TF:'TOGETHER × FOCUS',ID:'INTUITION × DATA'}[q[0]];$('questionText').textContent=q[1];$('questionNote').textContent=q[2];$('options').innerHTML='';choices.forEach(([letter,text],choiceIndex)=>{const b=document.createElement('button');b.className='option';b.innerHTML='<b>RESPONSE 0'+(choiceIndex+1)+'</b><span>'+text+'</span>';b.onclick=()=>choose(letter);$('options').appendChild(b)});$('backBtn').hidden=index===0}
   function choose(letter){answers[index]=letter;if(index<questions.length-1){index++;renderQuestion()}else showResult(calculateType(),answers)}
   function calculateType(){const dimensions=[['S','C'],['B','R'],['T','F'],['I','D']];return dimensions.map(([a,b])=>answers.filter(x=>x===a).length>answers.filter(x=>x===b).length?a:b).join('')}
   function saveResult(type,currentAnswers){const signature=currentAnswers.join('');const data=JSON.parse(localStorage.getItem(storeKey)||'{"history":[]}');const record={type,signature,at:new Date().toISOString()};data.last=record;data.history=[record,...(data.history||[]).filter(item=>item.signature!==signature)].slice(0,3);localStorage.setItem(storeKey,JSON.stringify(data));updateResume()}
   function broadcast(type,p){const c=personas[type];return '【ROOT 新奶器产品业务线｜SBTI 人格广播卡】\\n\\n我是 '+type+' · '+p[0]+' / '+c[0]+'。\\n'+p[1]+'\\n\\n我的核武器：'+p[2]+'\\n微疯时刻：'+p[3]+'\\n团队使用说明：'+p[4]+'\\n团队彩蛋：'+p[5]+'\\n\\n—— ROOT Innovation Lab · 频段已锁定'}
-  function showResult(type,currentAnswers,restored=false){const p=profiles[type],c=personas[type],detail={power:'当问题还没有被命名时，这正是你最容易打开局面的时刻。',chaos:'这不是缺点提示，而是一张提醒卡：把能量留给真正值得的方向。',usage:'最顺的配合方式，是让你的判断先被完整听见，再一起接住下一步。',egg:'所以你留下的不只是一个答案，还会让身边的人多一份敢往前走的底气。'},slot=Object.keys(personas).indexOf(type);if(!restored)saveResult(type,currentAnswers);$('resultCode').textContent='YOUR TYPE · '+type;$('resultTitle').innerHTML=p[0].split(' ').join('<em> ')+'</em>';$('definition').textContent=p[1];$('avatarName').textContent=c[0];$('story').textContent=c[2];['avatar','shareAvatar'].forEach(id=>{const a=$(id),img=a.querySelector('.sprite-portrait');a.style.setProperty('--avatar-bg',c[3]);a.style.setProperty('--avatar-accent',c[4]);img.style.transform='translate(-'+(slot%4)*25+'%,-'+Math.floor(slot/4)*25+'%)'});$('avatarToken').textContent=type;$('broadcastText').textContent='你已锁定：'+type+' · '+p[0]+'。'+p[1];$('power').textContent=p[2]+' '+detail.power;$('chaos').textContent=p[3]+' '+detail.chaos;$('usage').textContent=p[4]+' '+detail.usage;$('easterEgg').textContent=p[5]+' '+detail.egg;$('shareTitle').textContent='ROOT SBTI · '+type+' '+p[0];$('shareText').textContent=c[0]+' · 新奶器产品业务线的创新频段已锁定';$('copyBtn').onclick=()=>copyText(broadcast(type,p));renderHistory();switchScreen('result')}
+  function showResult(type,currentAnswers,restored=false){const p=profiles[type],c=personas[type],detail={power:'当问题还没有被命名时，这正是你最容易打开局面的时刻。',chaos:'这不是缺点提示，而是一张提醒卡：把能量留给真正值得的方向。',usage:'最顺的配合方式，是让你的判断先被完整听见，再一起接住下一步。',egg:'所以你留下的不只是一个答案，还会让身边的人多一份敢往前走的底气。'},slot=Object.keys(personas).indexOf(type);if(!restored)saveResult(type,currentAnswers);$('resultCode').textContent='YOUR TYPE · '+type;$('resultTitle').innerHTML=p[0].split(' ').join('<em> ')+'</em>';$('definition').textContent=p[1];$('avatarName').textContent=c[0];$('story').textContent=c[2];['avatar','shareAvatar'].forEach(id=>{const a=$(id),img=a.querySelector('.sprite-portrait');a.style.setProperty('--avatar-bg',c[3]);a.style.setProperty('--avatar-accent',c[4]);img.src=window.SBTI_CHARACTER_ATLAS||'assets/sbti-character-atlas.svg';img.style.transform='translate(-'+(slot%4)*25+'%,-'+Math.floor(slot/4)*25+'%)'});$('avatarToken').textContent=type;$('broadcastText').textContent='你已锁定：'+type+' · '+p[0]+'。'+p[1];$('power').textContent=p[2]+' '+detail.power;$('chaos').textContent=p[3]+' '+detail.chaos;$('usage').textContent=p[4]+' '+detail.usage;$('easterEgg').textContent=p[5]+' '+detail.egg;$('shareTitle').textContent='ROOT SBTI · '+type+' '+p[0];$('shareText').textContent=c[0]+' · 新奶器产品业务线的创新频段已锁定';$('copyBtn').onclick=()=>copyText(broadcast(type,p));renderHistory();switchScreen('result')}
   function renderHistory(){const data=JSON.parse(localStorage.getItem(storeKey)||'{"history":[]}');const list=data.history||[];$('historyBox').hidden=list.length<2;$('historyList').innerHTML=list.map((r,i)=>'<span class="history-chip">'+(i===0?'本次 / ':'旧存档 / ')+r.type+' · '+profiles[r.type][0]+'</span>').join('')}
   function updateResume(){const data=JSON.parse(localStorage.getItem(storeKey)||'{}');$('resumeBtn').hidden=!data.last}
   function copyText(text){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>toast('广播卡已复制，去显摆一下。')).catch(()=>toast('复制失败，稍后再试。'))}else toast('当前浏览器不支持一键复制。')}
   let toastTimer;function toast(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2600)}
-  $('startBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('retestBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('resumeBtn').onclick=()=>{const data=JSON.parse(localStorage.getItem(storeKey)||'{}');if(data.last)showResult(data.last.type,data.last.signature.split(''),true)};updateResume();
+  $('startBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('backBtn').onclick=()=>{if(index>0){index--;answers.length=index;renderQuestion()}};$('retestBtn').onclick=()=>{answers=[];index=0;renderQuestion();switchScreen('test')};$('resumeBtn').onclick=()=>{const data=JSON.parse(localStorage.getItem(storeKey)||'{}');if(data.last)showResult(data.last.type,data.last.signature.split(''),true)};updateResume();
   </script>
 </body>
 </html>
